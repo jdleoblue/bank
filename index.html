@@ -3,350 +3,291 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JD's Bank Mobile UI</title>
+  <title>JD's Bank</title>
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(126, 142, 77, 0.25), transparent 30%),
-        radial-gradient(circle at 80% 15%, rgba(116, 63, 176, 0.22), transparent 28%),
-        radial-gradient(circle at 50% 90%, rgba(126, 142, 77, 0.22), transparent 35%),
-        #f7f7f4;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 30px;
-      color: #121722;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(125, 142, 74, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(128, 69, 255, 0.12), transparent 30%),
+        #f7f7f5;
+      overflow: hidden;
+      padding: 20px;
     }
 
-    .phone {
+    .app {
       width: 390px;
       height: 844px;
-      border-radius: 46px;
+      border-radius: 42px;
       overflow: hidden;
       position: relative;
-      background: rgba(255, 255, 255, 0.38);
-      backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      border: 1px solid rgba(255, 255, 255, 0.65);
+      background: rgba(255,255,255,0.48);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255,255,255,0.7);
       box-shadow:
-        0 30px 80px rgba(34, 38, 45, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        0 40px 80px rgba(0,0,0,0.12),
+        inset 0 1px 1px rgba(255,255,255,0.7);
     }
 
-    .screen {
+    .content {
+      padding: 28px;
       height: 100%;
-      padding: 28px 24px 120px;
+      overflow-y: auto;
       position: relative;
-      overflow: hidden;
     }
 
-    .status {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 20px;
+    .top-spacing {
+      height: 12px;
     }
 
-    .logo {
+    .logo-area {
       text-align: center;
-      margin-bottom: 22px;
+      position: relative;
+      margin-bottom: 40px;
     }
 
     .logo-mark {
       font-family: Georgia, serif;
-      font-size: 38px;
+      font-size: 52px;
       line-height: 1;
-      letter-spacing: -6px;
+      letter-spacing: -8px;
     }
 
     .logo-mark span:first-child {
-      color: #6f7f3f;
+      color: #6d7d3f;
     }
 
     .logo-mark span:last-child {
-      color: #7b38c6;
+      color: #8b3dff;
     }
 
-    .logo-name {
+    .logo-text {
       font-family: Georgia, serif;
-      font-size: 20px;
-      margin-top: 2px;
+      font-size: 22px;
+      margin-top: -4px;
+      color: #111827;
     }
 
     .profile {
       position: absolute;
-      top: 82px;
-      right: 28px;
-      width: 44px;
-      height: 44px;
+      top: 0;
+      right: 0;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: url("https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop") center/cover;
-      border: 2px solid rgba(255,255,255,.75);
-      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.7);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .profile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     h1 {
-      font-size: 27px;
-      margin-top: 30px;
-      margin-bottom: 6px;
-      letter-spacing: -0.8px;
+      font-size: 34px;
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      color: #0f172a;
+      margin-bottom: 12px;
     }
 
     .subtitle {
-      color: #69707d;
-      font-size: 15px;
-      margin-bottom: 34px;
-    }
-
-    .label {
       color: #6b7280;
-      font-size: 15px;
-      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 40px;
     }
 
-    .balance-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .section-label {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 12px;
     }
 
     .balance {
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: -1.5px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .balance h2 {
+      font-size: 64px;
+      line-height: 1;
+      letter-spacing: -4px;
+      color: #020617;
+    }
+
+    .eye {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid #111827;
     }
 
     .growth {
-      color: #6f7f3f;
-      font-size: 14px;
-      margin-top: 10px;
-      margin-bottom: 34px;
-      font-weight: 600;
-    }
-
-    .section-title {
+      color: #6d7d3f;
       font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 46px;
+    }
+
+    .accounts-title {
+      font-size: 22px;
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 22px;
+      color: #111827;
     }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.46);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255,255,255,.7);
-      border-radius: 28px;
-      padding: 20px;
-      margin-bottom: 14px;
+    .card {
+      background: rgba(255,255,255,0.42);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 34px;
+      padding: 26px;
+      margin-bottom: 24px;
       box-shadow:
-        0 18px 35px rgba(40, 50, 60, 0.08),
-        inset 0 1px 0 rgba(255,255,255,.7);
+        0 10px 40px rgba(0,0,0,0.05),
+        inset 0 1px 1px rgba(255,255,255,0.8);
     }
 
-    .account-top {
+    .card-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .left {
+      display: flex;
+      gap: 18px;
     }
 
     .icon {
-      width: 48px;
-      height: 48px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(126, 142, 77, 0.12);
-      color: #5f6f32;
+      background: rgba(109,125,63,0.08);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #6d7d3f;
+      font-size: 26px;
+    }
+
+    .account-name {
       font-size: 22px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
     }
 
-    .account-info {
-      flex: 1;
-      margin-left: 14px;
-    }
-
-    .account-info strong {
-      display: block;
-      font-size: 17px;
-      margin-bottom: 4px;
-    }
-
-    .account-info small {
-      color: #737b89;
+    .account-number {
+      color: #6b7280;
+      font-size: 16px;
     }
 
     .amount {
       text-align: right;
-      font-size: 17px;
-      font-weight: 700;
     }
 
-    .amount small {
+    .amount strong {
       display: block;
-      color: #6f7f3f;
-      font-size: 11px;
-      margin-top: 5px;
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #020617;
+    }
+
+    .amount span {
+      color: #6d7d3f;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .chart {
-      height: 42px;
-      margin-top: 18px;
-      border-radius: 20px;
+      height: 62px;
+      border-radius: 999px;
       background:
-        linear-gradient(160deg, transparent 50%, rgba(126,142,77,.18)),
-        url("data:image/svg+xml,%3Csvg width='300' height='60' viewBox='0 0 300 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 45 C35 35,45 40,70 30 C95 20,120 38,145 25 C175 10,195 35,220 22 C250 8,270 25,300 15' fill='none' stroke='%236f7f3f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/cover no-repeat;
+        linear-gradient(to bottom, transparent, rgba(109,125,63,0.08)),
+        url("data:image/svg+xml,%3Csvg width='320' height='60' viewBox='0 0 320 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40C30 35 55 36 80 25C100 18 125 32 150 28C180 23 210 10 240 16C270 22 290 15 320 8' stroke='%236d7d3f' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
     }
 
-    .goal {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .goal-text {
-      flex: 1;
-      margin-left: 14px;
-    }
-
-    .goal-text strong {
-      font-size: 15px;
-      display: block;
-    }
-
-    .goal-text small {
-      color: #737b89;
-      margin-top: 4px;
-      display: block;
+    .bottom-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 135px;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-radius: 36px 36px 0 0;
     }
 
     .voice-button {
       position: absolute;
+      bottom: 48px;
       left: 50%;
-      bottom: 42px;
       transform: translateX(-50%);
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255,255,255,.75);
-      color: #7b38c6;
-      font-size: 34px;
-      box-shadow:
-        0 16px 35px rgba(123, 56, 198, .28),
-        inset 0 1px 0 rgba(255,255,255,.9);
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .bottom-glass {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 118px;
-      background: rgba(255,255,255,.35);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border-top: 1px solid rgba(255,255,255,.6);
-      border-radius: 34px 34px 0 0;
-    }
-
-    .voice-panel {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -100%;
-      height: 58%;
-      padding: 34px 26px;
-      background: rgba(255,255,255,.58);
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      border-radius: 38px 38px 0 0;
-      border: 1px solid rgba(255,255,255,.75);
-      box-shadow: 0 -25px 60px rgba(40,40,60,.18);
-      transition: .45s ease;
-      z-index: 20;
-      text-align: center;
-    }
-
-    .voice-panel.active {
-      bottom: 0;
-    }
-
-    .handle {
-      width: 54px;
-      height: 5px;
-      background: rgba(70,70,80,.35);
-      border-radius: 99px;
-      margin: 0 auto 28px;
-    }
-
-    .mic-large {
       width: 92px;
       height: 92px;
-      margin: 0 auto 18px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 42px;
-      color: #7b38c6;
-      background: rgba(255,255,255,.78);
-      box-shadow: 0 0 40px rgba(123,56,198,.28);
-    }
-
-    .voice-panel h2 {
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .voice-panel p {
-      color: #5f6572;
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
-
-    .suggestion {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-align: left;
-      padding: 13px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.55);
-      margin-bottom: 10px;
-      color: #333947;
-      font-size: 14px;
-    }
-
-    .close {
-      margin-top: 14px;
-      width: 58px;
-      height: 58px;
       border-radius: 50%;
       border: none;
-      background: rgba(255,255,255,.8);
-      color: #7b38c6;
-      font-size: 30px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      box-shadow:
+        0 12px 35px rgba(139,61,255,0.22),
+        inset 0 1px 1px rgba(255,255,255,0.8);
       cursor: pointer;
+      z-index: 100;
     }
 
-    @media (max-width: 480px) {
+    .voice-button::before {
+      content: "🎙";
+      font-size: 40px;
+      color: #8b3dff;
+    }
+
+    .voice-button:hover {
+      transform: translateX(-50%) scale(1.04);
+    }
+
+    .up-arrow {
+      position: absolute;
+      bottom: 128px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #9ca3af;
+      font-size: 26px;
+    }
+
+    @media (max-width: 500px) {
       body {
         padding: 0;
       }
 
-      .phone {
+      .app {
         width: 100vw;
         height: 100vh;
         border-radius: 0;
@@ -356,100 +297,113 @@
 </head>
 
 <body>
-  <div class="phone">
-    <div class="screen">
-      <div class="status">
-        <span>9:41</span>
-        <span>◖◗  WiFi  ▰</span>
-      </div>
 
-      <div class="logo">
-        <div class="logo-mark"><span>J</span><span>D</span></div>
-        <div class="logo-name">JD’s Bank</div>
-      </div>
+  <div class="app">
 
-      <div class="profile"></div>
+    <div class="content">
+
+      <div class="top-spacing"></div>
+
+      <div class="logo-area">
+
+        <div class="logo-mark">
+          <span>J</span><span>D</span>
+        </div>
+
+        <div class="logo-text">
+          JD’s Bank
+        </div>
+
+        <div class="profile">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" />
+        </div>
+
+      </div>
 
       <h1>Good morning, Alex</h1>
-      <p class="subtitle">Here’s what’s happening with your money.</p>
 
-      <div class="label">Total Balance</div>
-      <div class="balance-row">
-        <div class="balance">$4,562.38</div>
-        <div>◉</div>
+      <div class="subtitle">
+        Here’s what’s happening with your money.
       </div>
 
-      <div class="growth">↑ $236.50 (5.47%) from last month</div>
+      <div class="section-label">
+        Total Balance
+      </div>
 
-      <div class="section-title">Accounts</div>
+      <div class="balance">
+        <h2>$4,562.38</h2>
+        <div class="eye"></div>
+      </div>
 
-      <div class="glass-card">
-        <div class="account-top">
-          <div class="icon">▣</div>
-          <div class="account-info">
-            <strong>Checking</strong>
-            <small>•••• 1234</small>
+      <div class="growth">
+        ↑ $236.50 (5.47%) from last month
+      </div>
+
+      <div class="accounts-title">
+        Accounts
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+
+          <div class="left">
+
+            <div class="icon">▣</div>
+
+            <div>
+              <div class="account-name">Checking</div>
+              <div class="account-number">•••• 1234</div>
+            </div>
+
           </div>
+
           <div class="amount">
-            $3,256.78
-            <small>Available balance</small>
+            <strong>$3,256.78</strong>
+            <span>Available balance</span>
           </div>
+
         </div>
+
         <div class="chart"></div>
+
       </div>
 
-      <div class="glass-card">
-        <div class="account-top">
-          <div class="icon">♧</div>
-          <div class="account-info">
-            <strong>Savings</strong>
-            <small>•••• 5678</small>
+      <div class="card">
+
+        <div class="card-top">
+
+          <div class="left">
+
+            <div class="icon">♧</div>
+
+            <div>
+              <div class="account-name">Savings</div>
+              <div class="account-number">•••• 5678</div>
+            </div>
+
           </div>
+
           <div class="amount">
-            $1,305.60
-            <small>Available balance</small>
+            <strong>$1,305.60</strong>
+            <span>Available balance</span>
           </div>
+
         </div>
+
         <div class="chart"></div>
+
       </div>
 
-      <div class="glass-card goal">
-        <div class="icon">⌁</div>
-        <div class="goal-text">
-          <strong>Grow your savings</strong>
-          <small>You’re on track to reach your goals.</small>
-        </div>
-        <div>›</div>
-      </div>
-
-      <div class="bottom-glass"></div>
-
-      <button class="voice-button" onclick="openVoice()">⌕</button>
-
-      <div class="voice-panel" id="voicePanel">
-        <div class="handle"></div>
-        <div class="mic-large">🎙</div>
-
-        <h2>Listening...</h2>
-        <p>How can I help you?</p>
-
-        <div class="suggestion">↔ Transfer $1,000 from savings to checking</div>
-        <div class="suggestion">▤ Pay my Capital One credit card</div>
-        <div class="suggestion">✦ Am I on track with my savings goal?</div>
-
-        <button class="close" onclick="closeVoice()">×</button>
-      </div>
     </div>
+
+    <div class="up-arrow">⌃</div>
+
+    <button class="voice-button"></button>
+
+    <div class="bottom-panel"></div>
+
   </div>
 
-  <script>
-    function openVoice() {
-      document.getElementById("voicePanel").classList.add("active");
-    }
-
-    function closeVoice() {
-      document.getElementById("voicePanel").classList.remove("active");
-    }
-  </script>
 </body>
 </html>
